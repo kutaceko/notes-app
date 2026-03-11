@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Poznámky</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- AUTH SCREEN -->
+    <div id="auth-screen" class="screen">
+      <div class="auth-container">
+        <h1>📝 Poznámky</h1>
+        <p class="subtitle">Vaše soukromá databáze poznámek</p>
+
+        <div class="tabs">
+          <button class="tab active" data-tab="login">Přihlášení</button>
+          <button class="tab" data-tab="register">Registrace</button>
+        </div>
+
+        <form id="login-form" class="auth-form">
+          <input
+            type="text"
+            id="login-username"
+            placeholder="Uživatelské jméno"
+            required
+            autocomplete="username" />
+          <input
+            type="password"
+            id="login-password"
+            placeholder="Heslo"
+            required
+            autocomplete="current-password" />
+          <button type="submit" class="btn btn-primary">Přihlásit se</button>
+        </form>
+
+        <form id="register-form" class="auth-form hidden">
+          <input
+            type="text"
+            id="register-username"
+            placeholder="Uživatelské jméno (min. 3 znaky)"
+            required
+            autocomplete="username" />
+          <input
+            type="password"
+            id="register-password"
+            placeholder="Heslo (min. 6 znaků)"
+            required
+            autocomplete="new-password" />
+          <button type="submit" class="btn btn-primary">
+            Zaregistrovat se
+          </button>
+        </form>
+
+        <div id="auth-error" class="error hidden"></div>
+      </div>
+    </div>
+
+    <!-- APP SCREEN -->
+    <div id="app-screen" class="screen hidden">
+      <header>
+        <div class="header-left">
+          <h1>📝 Poznámky</h1>
+          <span id="username-display"></span>
+        </div>
+        <div class="header-right">
+          <button
+            id="btn-delete-account"
+            class="btn btn-danger-outline"
+            title="Zrušit účet">
+            Zrušit účet
+          </button>
+          <button id="btn-logout" class="btn btn-outline">Odhlásit se</button>
+        </div>
+      </header>
+
+      <main>
+        <!-- New note form -->
+        <section class="new-note">
+          <h2>Nová poznámka</h2>
+          <form id="note-form">
+            <input
+              type="text"
+              id="note-title"
+              placeholder="Nadpis"
+              required
+              maxlength="255" />
+            <textarea
+              id="note-text"
+              placeholder="Text poznámky..."
+              required
+              rows="4"></textarea>
+            <button type="submit" class="btn btn-primary">
+              Přidat poznámku
+            </button>
+          </form>
+        </section>
+
+        <!-- Filter -->
+        <section class="notes-header">
+          <h2>Moje poznámky</h2>
+          <div class="filter-toggle">
+            <button id="btn-all" class="btn btn-filter active">Všechny</button>
+            <button id="btn-important" class="btn btn-filter">
+              ⭐ Důležité
+            </button>
+          </div>
+        </section>
+
+        <!-- Notes list -->
+        <section id="notes-list" class="notes-list">
+          <div class="loading">Načítání poznámek...</div>
+        </section>
+      </main>
+    </div>
+
+    <!-- Delete account modal -->
+    <div id="modal-overlay" class="modal-overlay hidden">
+      <div class="modal">
+        <h3>Zrušit účet</h3>
+        <p>
+          Tato akce je nevratná. Budou smazány všechny vaše poznámky. Pro
+          potvrzení zadejte své heslo.
+        </p>
+        <form id="delete-account-form">
+          <input
+            type="password"
+            id="delete-password"
+            placeholder="Zadejte heslo"
+            required
+            autocomplete="current-password" />
+          <div class="modal-buttons">
+            <button
+              type="button"
+              id="btn-cancel-delete"
+              class="btn btn-outline">
+              Zrušit
+            </button>
+            <button type="submit" class="btn btn-danger">Smazat účet</button>
+          </div>
+        </form>
+        <div id="delete-error" class="error hidden"></div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
